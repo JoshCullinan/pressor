@@ -21,7 +21,7 @@ The full design is in [SPEC.md](SPEC.md).
 
 ## Status
 
-Early development. The calculation engine (`src/engine`) and its tests are in place; the screens are next.
+Early development. The calculation engine (`src/engine`), the calculator screen (both directions, remembered strengths, working sheet, dark mode) and an About screen are in place and tested on an Android emulator. Still to come: the titration pop-up, release builds (including blocking the INTERNET permission), and iOS testing.
 
 ## Development
 

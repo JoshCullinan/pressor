@@ -109,7 +109,11 @@ Property tests: dose → rate → dose returns the input; changing the dose's un
 6. **Result:** the rate (or dose) in large type. Below it, a one-line summary of the assumptions, e.g. `4 × 1 mg/1 mL into 100 mL (16 mL removed) = 160 mcg/mL`. A "Show working" expander prints the formula with the numbers substituted.
 7. A **Reset** button clears everything.
 
-**Settings and About:** theme (light/dark/system), pump rounding (0.1 or 1 mL/h), disclaimer text, licence, link to the source repository, and an optional list of external dosing references (links open the browser; the app itself stays offline).
+**Pump rounding** (0.1 or 1 mL/h) is a small toggle in the corner of the result card, so it is changeable at the point of use. It is remembered between sessions.
+
+**About:** the disclaimer, the licence and a link to the source repository. The theme follows the phone's light/dark setting. A separate Settings screen and an optional list of external dosing references (links open the browser; the app itself stays offline) are not built yet.
+
+**Working sheet:** "Show working" in the result card opens a pop-up sheet listing each step of the calculation with the numbers substituted. The same sheet component will host the titration table.
 
 **Titration table (v1.1, after the calculator works):** not a separate page. It opens as a pop-up sheet from a button next to the result, and closes back to the calculator, so it is never in the way.
 - Uses the current mix and weight. The header repeats the assumptions line.

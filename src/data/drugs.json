@@ -1,0 +1,10 @@
+[
+  { "name": "Adrenaline", "aliases": ["Epinephrine"], "defaultDoseUnit": "mcg/kg/min" },
+  { "name": "Noradrenaline", "aliases": ["Norepinephrine"], "defaultDoseUnit": "mcg/kg/min" },
+  { "name": "Phenylephrine", "aliases": [], "defaultDoseUnit": "mcg/kg/min" },
+  { "name": "Dopamine", "aliases": [], "defaultDoseUnit": "mcg/kg/min" },
+  { "name": "Dobutamine", "aliases": [], "defaultDoseUnit": "mcg/kg/min" },
+  { "name": "Vasopressin", "aliases": [], "defaultDoseUnit": "units/h" },
+  { "name": "Milrinone", "aliases": [], "defaultDoseUnit": "mcg/kg/min" },
+  { "name": "Isoprenaline", "aliases": ["Isoproterenol"], "defaultDoseUnit": "mcg/min" }
+]
