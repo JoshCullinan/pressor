@@ -24,6 +24,7 @@ export function Segmented<T extends string>({ options, value, onChange, accessib
             key={o.value}
             onPress={() => onChange(o.value)}
             accessibilityRole="radio"
+            accessibilityLabel={o.label}
             accessibilityState={{ selected }}
             style={[styles.item, selected && { backgroundColor: c.accent }]}
           >

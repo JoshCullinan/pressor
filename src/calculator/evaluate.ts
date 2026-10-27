@@ -76,7 +76,17 @@ export type Evaluation =
       /** The formulas with the numbers substituted. */
       working: string[];
       notices: string[];
+      /** The parsed inputs and both sides of the answer, for the titration table. */
+      inputs: CalcInputs;
     };
+
+export interface CalcInputs {
+  mix: Mix;
+  doseUnit: DoseUnit;
+  weightKg: number | undefined;
+  dose: number;
+  rateMlH: number;
+}
 
 const FIELD_NAMES: Record<string, string> = {
   ampAmount: 'Ampoule strength',
@@ -96,7 +106,8 @@ function errorMessage(error: EngineError): string {
       ? `${name} must be zero or more`
       : `${name} must be a number greater than zero`;
   }
-  if (error.code === 'weight-required') return "Enter the patient's weight";
+  // A blank weight is reported as missing before the engine runs, so here the weight was entered but is not usable.
+  if (error.code === 'weight-required') return 'Weight must be a number greater than zero';
   return error.message;
 }
 
@@ -158,6 +169,7 @@ export function evaluate(form: FormState, pumpStep: PumpStep): Evaluation {
   const divisor = factors.length > 0 ? factors.join(' × ') : '1';
 
   let headline: Headline;
+  let solved: { dose: number; rateMlH: number };
   if (toRate) {
     const r = doseToRate(mix, du, dose!, weight);
     if (!r.ok) return { status: 'error', message: errorMessage(r.error) };
@@ -167,10 +179,12 @@ export function evaluate(form: FormState, pumpStep: PumpStep): Evaluation {
       `Rate: ${sigFigs(dose!)} ${doseLabel}${times} ÷ ${concText} = ${sigFigs(r.value.rateMlH, 4)} mL/h`,
     );
     if (rounded.roundsToZero) notices.push('The rate rounds to 0 at this pump resolution');
+    solved = { dose: dose!, rateMlH: r.value.rateMlH };
   } else {
     const r = rateToDose(mix, du, rate!, weight);
     if (!r.ok) return { status: 'error', message: errorMessage(r.error) };
     headline = { label: 'Dose', value: sigFigs(r.value.dose), unit: doseLabel };
+    solved = { dose: r.value.dose, rateMlH: rate! };
     working.push(
       `Dose: ${sigFigs(rate!)} mL/h × ${concText} ÷ (${divisor}) = ${sigFigs(r.value.dose, 4)} ${doseLabel}`,
     );
@@ -182,5 +196,6 @@ export function evaluate(form: FormState, pumpStep: PumpStep): Evaluation {
     summary: describeMix(mix, m, du.unit),
     working,
     notices,
+    inputs: { mix, doseUnit: du, weightKg: du.perKg ? weight : undefined, ...solved },
   };
 }

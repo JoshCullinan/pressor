@@ -118,7 +118,7 @@ Property tests: dose → rate → dose returns the input; changing the dose's un
 **Titration table (v1.1, after the calculator works):** not a separate page. It opens as a pop-up sheet from a button next to the result, and closes back to the calculator, so it is never in the way.
 - Uses the current mix and weight. The header repeats the assumptions line.
 - Two modes, switched with a toggle: **by dose** (dose → rate) and **by pump rate** (rate → dose, for "if I nudge the pump to 4 mL/h, what dose is that?").
-- Controls: start, step, number of rows. Pre-filled from the calculator; the step defaults to the current value (0.1 gives 0.1, 0.2, 0.3 …) and is editable. The row matching the current value is highlighted.
+- Controls: start, step, number of rows (up to 50). Pre-filled from the calculator. By dose, the start and step default to the current dose (0.1 gives 0.1, 0.2, 0.3 …). By pump rate, the step defaults to 1 mL/h, starting a few mL/h below the current rate, because pumps are nudged in whole mL/h. All editable. The row matching the current value is highlighted.
 - Tapping a row loads that dose or rate into the calculator and closes the sheet.
 - With 1 mL/h pump rounding, a small note shows the dose actually delivered at the rounded rate.
 - Every row comes from the same engine function as the main screen, and tests check each row against a single calculation.

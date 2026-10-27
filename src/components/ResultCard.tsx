@@ -8,10 +8,11 @@ interface Props {
   pumpStep: PumpStep;
   onPumpStep: (step: PumpStep) => void;
   onShowWorking: () => void;
+  onShowTitration: () => void;
 }
 
 /** The answer, pinned above the form so it stays in view while the clinician edits. */
-export function ResultCard({ evaluation, pumpStep, onPumpStep, onShowWorking }: Props) {
+export function ResultCard({ evaluation, pumpStep, onPumpStep, onShowWorking, onShowTitration }: Props) {
   const c = useColors();
   const showsRate = evaluation.status === 'ok' && evaluation.headline.unit === 'mL/h';
 
@@ -35,9 +36,14 @@ export function ResultCard({ evaluation, pumpStep, onPumpStep, onShowWorking }: 
               {n}
             </Text>
           ))}
-          <Pressable onPress={onShowWorking} accessibilityRole="button" style={styles.working}>
-            <Text style={[styles.workingText, { color: c.resultText }]}>Show working</Text>
-          </Pressable>
+          <View style={styles.links}>
+            <Pressable onPress={onShowWorking} accessibilityRole="button" accessibilityLabel="Show working" style={styles.working}>
+              <Text style={[styles.workingText, { color: c.resultText }]}>Show working</Text>
+            </Pressable>
+            <Pressable onPress={onShowTitration} accessibilityRole="button" accessibilityLabel="Titration table" style={styles.working}>
+              <Text style={[styles.workingText, { color: c.resultText }]}>Titration table</Text>
+            </Pressable>
+          </View>
         </>
       ) : (
         <View style={styles.empty}>
@@ -97,6 +103,7 @@ const styles = StyleSheet.create({
   unit: { fontSize: 22, fontWeight: '600' },
   summary: { fontSize: 14, lineHeight: 20, marginTop: space.xs },
   notice: { fontSize: 14, fontWeight: '600', marginTop: space.sm, padding: space.sm, borderRadius: radius.sm, overflow: 'hidden' },
+  links: { flexDirection: 'row', gap: space.xl },
   working: { alignSelf: 'flex-start', minHeight: TOUCH - 8, justifyContent: 'center', marginTop: space.xs },
   workingText: { fontSize: 15, fontWeight: '600', textDecorationLine: 'underline' },
   empty: { minHeight: 110, justifyContent: 'center' },

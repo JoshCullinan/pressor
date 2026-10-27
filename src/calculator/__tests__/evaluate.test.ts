@@ -145,6 +145,15 @@ describe('evaluate', () => {
     });
   });
 
+  it('says a zero or junk weight is unusable rather than missing', () => {
+    for (const weight of ['0', 'x']) {
+      expect(evaluate({ ...adrenaline, weight }, 0.1)).toEqual({
+        status: 'error',
+        message: 'Weight must be a number greater than zero',
+      });
+    }
+  });
+
   it('refuses units that cannot be converted', () => {
     const form: FormState = { ...adrenaline, doseUnit: { unit: 'units', perKg: false, per: 'h' } };
     expect(evaluate(form, 0.1)).toEqual({

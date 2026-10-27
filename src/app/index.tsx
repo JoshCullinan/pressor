@@ -19,6 +19,7 @@ import { NumberField } from '../components/NumberField';
 import { ResultCard } from '../components/ResultCard';
 import { Segmented } from '../components/Segmented';
 import { Sheet } from '../components/Sheet';
+import { TitrationTable } from '../components/TitrationTable';
 import { doseUnitLabel, drugKey, findDrug, searchDrugs } from '../data/drugs';
 import { AMOUNT_UNITS, replacedVolumeMl, sigFigs, type AmountUnit } from '../engine';
 import { ageLabel, describeStrength } from '../storage/strengths';
@@ -40,6 +41,7 @@ export default function Calculator() {
   const calc = useCalculator();
   const { form, patch, evaluation } = calc;
   const [showWorking, setShowWorking] = useState(false);
+  const [showTitration, setShowTitration] = useState(false);
   const now = useNow();
 
   const toRate = form.direction === 'dose-to-rate';
@@ -57,7 +59,7 @@ export default function Calculator() {
         <View style={styles.header}>
           <Text style={[styles.title, { color: c.text }]}>Pressor</Text>
           <View style={styles.headerActions}>
-            <Pressable onPress={calc.reset} accessibilityRole="button" style={styles.headerButton}>
+            <Pressable onPress={calc.reset} accessibilityRole="button" accessibilityLabel="Reset" style={styles.headerButton}>
               <Text style={[styles.headerText, { color: c.accent }]}>Reset</Text>
             </Pressable>
             <Link href="/about" style={[styles.headerButton, styles.headerText, { color: c.accent }]}>
@@ -71,6 +73,7 @@ export default function Calculator() {
           pumpStep={calc.pumpStep}
           onPumpStep={calc.setPumpStep}
           onShowWorking={() => setShowWorking(true)}
+          onShowTitration={() => setShowTitration(true)}
         />
 
         <ScrollView
@@ -269,6 +272,25 @@ export default function Calculator() {
               </Text>
             ))
           : null}
+      </Sheet>
+
+      <Sheet visible={showTitration} title="Titration table" onClose={() => setShowTitration(false)}>
+        {evaluation.status === 'ok' ? (
+          <TitrationTable
+            inputs={evaluation.inputs}
+            summary={evaluation.summary}
+            pumpStep={calc.pumpStep}
+            initialMode={toRate ? 'by-dose' : 'by-rate'}
+            onPick={(mode, value) => {
+              patch(
+                mode === 'by-dose'
+                  ? { direction: 'dose-to-rate', dose: String(value) }
+                  : { direction: 'rate-to-dose', rate: String(value) },
+              );
+              setShowTitration(false);
+            }}
+          />
+        ) : null}
       </Sheet>
     </SafeAreaView>
   );
