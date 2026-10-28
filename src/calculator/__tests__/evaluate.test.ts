@@ -105,20 +105,34 @@ describe('evaluate', () => {
     expect(e.working.at(-1)).toBe('Rate: 0.6 mg/h ÷ 0.05 mg/mL = 12 mL/h');
   });
 
-  it('says what is missing, in a sensible order, without shouting', () => {
+  it('says what is missing, in form order, and which field to go to', () => {
     expect(evaluate(initialForm, 0.1)).toEqual({
       status: 'incomplete',
-      missing: ['the ampoule strength', 'the number of ampoules', 'the bag volume', "the patient's weight", 'the dose'],
+      missing: [
+        { label: 'Ampoule strength', field: 'ampAmount' },
+        { label: 'Ampoules added', field: 'nAmps' },
+        { label: 'Bag volume', field: 'bagVolume' },
+        { label: 'Weight', field: 'weight' },
+        { label: 'Dose', field: 'dose' },
+      ],
     });
-    expect(evaluate({ ...adrenaline, dose: '' }, 0.1)).toEqual({ status: 'incomplete', missing: ['the dose'] });
+    expect(evaluate({ ...adrenaline, dose: '' }, 0.1)).toEqual({
+      status: 'incomplete',
+      missing: [{ label: 'Dose', field: 'dose' }],
+    });
     expect(evaluate({ ...adrenaline, weight: '' }, 0.1)).toEqual({
       status: 'incomplete',
-      missing: ["the patient's weight"],
+      missing: [{ label: 'Weight', field: 'weight' }],
     });
     expect(evaluate({ ...adrenaline, direction: 'rate-to-dose' }, 0.1)).toEqual({
       status: 'incomplete',
-      missing: ['the pump rate'],
+      missing: [{ label: 'Pump rate', field: 'rate' }],
     });
+  });
+
+  it('sends a half-entered strength to the empty half', () => {
+    const e = evaluate({ ...adrenaline, ampVolume: '' }, 0.1);
+    expect(e).toEqual({ status: 'incomplete', missing: [{ label: 'Ampoule strength', field: 'ampVolume' }] });
   });
 
   it('does not ask for weight on a dose that is not per-kg', () => {

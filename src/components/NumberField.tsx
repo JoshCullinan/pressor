@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useState, type Ref } from 'react';
+import { Pressable, StyleSheet, Text, TextInput, View, type TextInputInstance } from 'react-native';
 import { sanitizeNumberInput } from '../calculator/parse';
 import { TOUCH, font, radius, space, useColors } from '../theme';
 
@@ -17,9 +17,10 @@ interface Props {
   onFocus?: () => void;
   onBlur?: () => void;
   flex?: number;
+  ref?: Ref<TextInputInstance>;
 }
 
-export function NumberField({ label, value, onChangeText, suffix, unit, placeholder, unconfirmed, onFocus, onBlur, flex = 1 }: Props) {
+export function NumberField({ label, value, onChangeText, suffix, unit, placeholder, unconfirmed, onFocus, onBlur, flex = 1, ref }: Props) {
   const c = useColors();
   const [focused, setFocused] = useState(false);
   const borderColor = focused ? c.accent : unconfirmed ? c.warnBorder : c.border;
@@ -38,6 +39,7 @@ export function NumberField({ label, value, onChangeText, suffix, unit, placehol
         ]}
       >
         <TextInput
+          ref={ref}
           accessibilityLabel={unit ? `${label}, ${unit.label}` : label}
           value={value}
           onChangeText={(t) => onChangeText(sanitizeNumberInput(t))}

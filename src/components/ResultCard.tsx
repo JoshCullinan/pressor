@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import type { Direction, Evaluation } from '../calculator/evaluate';
+import type { Direction, Evaluation, InputField } from '../calculator/evaluate';
 import type { PumpStep } from '../engine';
 import { TOUCH, font, radius, space, useColors } from '../theme';
 import { Segmented } from './Segmented';
@@ -23,6 +23,8 @@ interface Props {
   onPumpStep: (step: PumpStep) => void;
   onShowWorking: () => void;
   onShowTitration: () => void;
+  /** Take the clinician to a field that still needs a value. */
+  onGoTo: (field: InputField) => void;
   /** While the keyboard is up, keep only the band and the number. */
   compact?: boolean;
 }
@@ -32,7 +34,7 @@ interface Props {
  * concentration, the number large beneath, and every assumption on the lines under it.
  */
 export function ResultCard(props: Props) {
-  const { evaluation, drugLabel, direction, onDirection, pumpStep, onPumpStep, onShowWorking, onShowTitration, compact } = props;
+  const { evaluation, drugLabel, direction, onDirection, pumpStep, onPumpStep, onShowWorking, onShowTitration, onGoTo, compact } = props;
   const c = useColors();
   const ok = evaluation.status === 'ok';
   const showsRate = ok && evaluation.headline.unit === 'mL/h';
@@ -107,7 +109,17 @@ export function ResultCard(props: Props) {
             ) : (
               <>
                 <Text style={[styles.emptyTitle, { color: c.labelText }]}>Still needed</Text>
-                <Text style={[styles.emptyText, { color: c.labelMuted }]}>{capitalise(listOf(evaluation.missing))}</Text>
+                {compact ? (
+                  <Text style={[styles.emptyText, { color: c.labelMuted }]}>
+                    {evaluation.missing.map((m) => m.label).join(', ')}
+                  </Text>
+                ) : (
+                  <View style={styles.missing}>
+                    {evaluation.missing.map((m) => (
+                      <GoTo key={m.field} label={m.label} onPress={() => onGoTo(m.field)} />
+                    ))}
+                  </View>
+                )}
               </>
             )}
           </View>
@@ -130,15 +142,25 @@ function Action({ label, onPress }: { label: string; onPress: () => void }) {
   );
 }
 
-function listOf(items: string[]): string {
-  if (items.length <= 2) return items.join(' and ');
-  return `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`;
+/** A missing value, as a button that jumps to its field. */
+function GoTo({ label, onPress }: { label: string; onPress: () => void }) {
+  const c = useColors();
+  return (
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={`${label}: go to the field`}
+      hitSlop={4}
+      style={({ pressed }) => [styles.goTo, { borderColor: c.labelLine }, pressed && { backgroundColor: c.accentSoft }]}
+    >
+      <Text style={[styles.goToText, { color: c.accent }]}>{label}</Text>
+      <View style={[styles.arrow, { borderColor: c.accent }]} />
+    </Pressable>
+  );
 }
 
 /** Keep "50 mcg/mL" on one line: a no-break space between number and unit, a word joiner after each slash. */
 const keepUnitsWhole = (s: string) => s.replace(/(\d) (?=[a-zA-Z])/g, '$1\u00A0').replace(/\//g, '/\u2060');
-
-const capitalise = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 const styles = StyleSheet.create({
   card: { marginHorizontal: space.md, borderRadius: radius.sm, borderWidth: 1, overflow: 'hidden' },
@@ -174,8 +196,21 @@ const styles = StyleSheet.create({
   actions: { flexDirection: 'row', gap: space.sm, marginTop: space.md },
   action: { flex: 1, minHeight: TOUCH - 4, borderWidth: 1.5, borderRadius: radius.control, alignItems: 'center', justifyContent: 'center' },
   actionText: { fontFamily: font.bold, fontSize: 16 },
-  empty: { minHeight: 132, justifyContent: 'center' },
+  empty: { minHeight: 132, justifyContent: 'center', paddingTop: space.md },
   emptyCompact: { minHeight: 64 },
   emptyTitle: { fontFamily: font.labelHeavy, fontSize: 30, lineHeight: 36, textTransform: 'uppercase' },
   emptyText: { fontFamily: font.medium, fontSize: 16, lineHeight: 22, marginTop: space.xs },
+  missing: { flexDirection: 'row', flexWrap: 'wrap', gap: space.sm, marginTop: space.sm },
+  goTo: {
+    minHeight: TOUCH - 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: space.sm,
+    paddingLeft: space.md,
+    paddingRight: space.md + 2,
+    borderWidth: 1.5,
+    borderRadius: radius.control,
+  },
+  goToText: { fontFamily: font.bold, fontSize: 16 },
+  arrow: { width: 7, height: 7, borderTopWidth: 2, borderRightWidth: 2, transform: [{ rotate: '45deg' }] },
 });

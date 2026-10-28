@@ -1,5 +1,5 @@
 import { Link } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -10,8 +10,10 @@ import {
   Text,
   TextInput,
   View,
+  type TextInputInstance,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import type { Direction, InputField } from '../calculator/evaluate';
 import { parseNumber } from '../calculator/parse';
 import { useCalculator } from '../calculator/useCalculator';
 import { useNow } from '../calculator/useNow';
@@ -48,6 +50,34 @@ export default function Calculator() {
   const keyboardUp = useKeyboardVisible();
   const now = useNow();
   const close = () => setSheet(null);
+  // One ref per number field, so the result card can send the clinician to whatever is still missing.
+  const ampAmountRef = useRef<TextInputInstance>(null);
+  const ampVolumeRef = useRef<TextInputInstance>(null);
+  const nAmpsRef = useRef<TextInputInstance>(null);
+  const bagVolumeRef = useRef<TextInputInstance>(null);
+  const weightRef = useRef<TextInputInstance>(null);
+  const doseRef = useRef<TextInputInstance>(null);
+  const rateRef = useRef<TextInputInstance>(null);
+  const goTo = (field: InputField) => {
+    const refs = {
+      ampAmount: ampAmountRef,
+      ampVolume: ampVolumeRef,
+      nAmps: nAmpsRef,
+      bagVolume: bagVolumeRef,
+      weight: weightRef,
+      dose: doseRef,
+      rate: rateRef,
+    };
+    refs[field].current?.focus();
+  };
+  // Switching direction swaps the dose field for the pump rate field. The new one takes the cursor once it
+  // has rendered, but only when it is empty: a filled one already gives an answer.
+  const switchDirection = (direction: Direction) => {
+    if (direction === form.direction) return;
+    patch({ direction });
+    const field = direction === 'dose-to-rate' ? 'dose' : 'rate';
+    if (form[field] === '') requestAnimationFrame(() => goTo(field));
+  };
 
   const toRate = form.direction === 'dose-to-rate';
   const nAmps = parseNumber(form.nAmps);
@@ -89,11 +119,12 @@ export default function Calculator() {
           evaluation={evaluation}
           drugLabel={form.drugLabel}
           direction={form.direction}
-          onDirection={(direction) => patch({ direction })}
+          onDirection={switchDirection}
           pumpStep={calc.pumpStep}
           onPumpStep={calc.setPumpStep}
           onShowWorking={() => setSheet('working')}
           onShowTitration={() => setSheet('titration')}
+          onGoTo={goTo}
           compact={keyboardUp}
         />
 
@@ -111,6 +142,7 @@ export default function Calculator() {
             <Section title="Ampoule label">
               <View style={styles.row}>
                 <NumberField
+                  ref={ampAmountRef}
                   label="Amount"
                   value={form.ampAmount}
                   onChangeText={(ampAmount) => calc.editStrength({ ampAmount })}
@@ -124,6 +156,7 @@ export default function Calculator() {
                 />
                 <Text style={[styles.joiner, { color: c.textMuted }]}>in</Text>
                 <NumberField
+                  ref={ampVolumeRef}
                   label="Volume"
                   value={form.ampVolume}
                   onChangeText={(ampVolume) => calc.editStrength({ ampVolume })}
@@ -172,9 +205,15 @@ export default function Calculator() {
 
             <Section title="Bag">
               <View style={styles.row}>
-                <NumberField label="Ampoules added" value={form.nAmps} onChangeText={(n) => patch({ nAmps: n })} />
+                <NumberField
+                  ref={nAmpsRef}
+                  label="Ampoules added"
+                  value={form.nAmps}
+                  onChangeText={(n) => patch({ nAmps: n })}
+                />
                 <Text style={[styles.joiner, { color: c.textMuted }]}>into</Text>
                 <NumberField
+                  ref={bagVolumeRef}
                   label="Bag volume"
                   value={form.bagVolume}
                   onChangeText={(bagVolume) => patch({ bagVolume })}
@@ -224,6 +263,7 @@ export default function Calculator() {
               <View style={styles.row}>
                 {form.doseUnit.perKg ? (
                   <NumberField
+                    ref={weightRef}
                     label="Weight"
                     value={form.weight}
                     onChangeText={(weight) => patch({ weight })}
@@ -233,6 +273,7 @@ export default function Calculator() {
                 {toRate ? (
                   <NumberField
                     flex={form.doseUnit.perKg ? 1.5 : 1}
+                    ref={doseRef}
                     label="Dose"
                     value={form.dose}
                     onChangeText={(dose) => patch({ dose })}
@@ -245,6 +286,7 @@ export default function Calculator() {
                 ) : (
                   <NumberField
                     flex={form.doseUnit.perKg ? 1.5 : 1}
+                    ref={rateRef}
                     label="Pump rate"
                     value={form.rate}
                     onChangeText={(rate) => patch({ rate })}

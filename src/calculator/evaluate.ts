@@ -64,9 +64,18 @@ export interface Headline {
   unit: string;
 }
 
+/** A number field on the form, by its FormState key. */
+export type InputField = 'ampAmount' | 'ampVolume' | 'nAmps' | 'bagVolume' | 'weight' | 'dose' | 'rate';
+
+/** Something still to fill in, and the field to take the clinician to. */
+export interface Missing {
+  label: string;
+  field: InputField;
+}
+
 export type Evaluation =
   | { status: 'unconfirmed' }
-  | { status: 'incomplete'; missing: string[] }
+  | { status: 'incomplete'; missing: Missing[] }
   | { status: 'error'; message: string }
   | {
       status: 'ok';
@@ -127,13 +136,14 @@ export function evaluate(form: FormState, pumpStep: PumpStep): Evaluation {
   const rate = parseNumber(form.rate);
   const toRate = form.direction === 'dose-to-rate';
 
-  const missing: string[] = [];
-  if (ampAmount === undefined || ampVolume === undefined) missing.push('the ampoule strength');
-  if (nAmps === undefined) missing.push('the number of ampoules');
-  if (bagVolume === undefined) missing.push('the bag volume');
-  if (form.doseUnit.perKg && weight === undefined) missing.push("the patient's weight");
-  if (toRate && dose === undefined) missing.push('the dose');
-  if (!toRate && rate === undefined) missing.push('the pump rate');
+  const missing: Missing[] = [];
+  if (ampAmount === undefined || ampVolume === undefined)
+    missing.push({ label: 'Ampoule strength', field: ampAmount === undefined ? 'ampAmount' : 'ampVolume' });
+  if (nAmps === undefined) missing.push({ label: 'Ampoules added', field: 'nAmps' });
+  if (bagVolume === undefined) missing.push({ label: 'Bag volume', field: 'bagVolume' });
+  if (form.doseUnit.perKg && weight === undefined) missing.push({ label: 'Weight', field: 'weight' });
+  if (toRate && dose === undefined) missing.push({ label: 'Dose', field: 'dose' });
+  if (!toRate && rate === undefined) missing.push({ label: 'Pump rate', field: 'rate' });
   if (missing.length > 0) return { status: 'incomplete', missing };
 
   const removedVolumeMl = form.replaceRemoved
