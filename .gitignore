@@ -44,3 +44,8 @@ example
 
 # Claude Code
 .claude/settings.local.json
+
+# Impeccable working files (the surface brief under .impeccable/surfaces is kept)
+.impeccable/mocks/
+.impeccable/review/
+.impeccable/live/

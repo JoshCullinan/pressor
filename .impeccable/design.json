@@ -1,0 +1,727 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-28T07:13:15+00:00",
+  "title": "Design System: Pressor",
+  "extensions": {
+    "colorMeta": {
+      "ground": {
+        "role": "neutral",
+        "displayName": "Lavender Ground",
+        "canonical": "#F3F0F6",
+        "tonalRamp": [
+          "#0C0A0E",
+          "#252327",
+          "#413F43",
+          "#5F5C61",
+          "#7F7C81",
+          "#A09DA3",
+          "#C5C3C8",
+          "#F0EDF3"
+        ]
+      },
+      "label-stock": {
+        "role": "neutral",
+        "displayName": "Label Stock",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Label Ink",
+        "canonical": "#1C1822",
+        "tonalRamp": [
+          "#0D0912",
+          "#26222C",
+          "#423D49",
+          "#605B67",
+          "#7F7B87",
+          "#A19CA9",
+          "#C6C1CF",
+          "#F1EBFA"
+        ]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "canonical": "#5E5668",
+        "tonalRamp": [
+          "#0E0815",
+          "#272030",
+          "#433C4D",
+          "#62596C",
+          "#81798C",
+          "#A39AAE",
+          "#C9C0D4",
+          "#F3EAFF"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#D6CFDD",
+        "tonalRamp": [
+          "#0E0912",
+          "#27212C",
+          "#433D48",
+          "#615B67",
+          "#817A87",
+          "#A29BA8",
+          "#C8C1CF",
+          "#F2EBF9"
+        ]
+      },
+      "violet": {
+        "role": "primary",
+        "displayName": "Ampoule Violet",
+        "canonical": "#5A2D75",
+        "tonalRamp": [
+          "#1A002E",
+          "#36064D",
+          "#54286D",
+          "#73478F",
+          "#9467B2",
+          "#B688D5",
+          "#DDAEFE",
+          "#FFD8FF"
+        ]
+      },
+      "on-violet": {
+        "role": "primary",
+        "displayName": "On Violet",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "violet-wash": {
+        "role": "primary",
+        "displayName": "Violet Wash",
+        "canonical": "#EDE3F3",
+        "tonalRamp": [
+          "#0F0812",
+          "#28212C",
+          "#443C49",
+          "#625A67",
+          "#827988",
+          "#A49AA9",
+          "#CAC0CF",
+          "#F4EAFA"
+        ]
+      },
+      "band": {
+        "role": "secondary",
+        "displayName": "Label Band Lilac",
+        "canonical": "#C9A2DC",
+        "tonalRamp": [
+          "#180025",
+          "#341242",
+          "#512F61",
+          "#714D81",
+          "#916CA3",
+          "#B48DC6",
+          "#DAB3EE",
+          "#FFDDFF"
+        ]
+      },
+      "on-band": {
+        "role": "secondary",
+        "displayName": "Band Ink",
+        "canonical": "#1C1822",
+        "tonalRamp": [
+          "#0D0912",
+          "#26222C",
+          "#423D49",
+          "#605B67",
+          "#7F7B87",
+          "#A19CA9",
+          "#C6C1CF",
+          "#F1EBFA"
+        ]
+      },
+      "on-ink": {
+        "role": "neutral",
+        "displayName": "On Ink",
+        "canonical": "#F3F0F6",
+        "tonalRamp": [
+          "#0C0A0E",
+          "#252327",
+          "#413F43",
+          "#5F5C61",
+          "#7F7C81",
+          "#A09DA3",
+          "#C5C3C8",
+          "#F0EDF3"
+        ]
+      },
+      "amber-bg": {
+        "role": "tertiary",
+        "displayName": "Old-Strength Amber Wash",
+        "canonical": "#FCEFD8",
+        "tonalRamp": [
+          "#120900",
+          "#2C2210",
+          "#493E2B",
+          "#675C48",
+          "#877C67",
+          "#A99D87",
+          "#CFC3AC",
+          "#FAEDD6"
+        ]
+      },
+      "amber-line": {
+        "role": "tertiary",
+        "displayName": "Old-Strength Amber Line",
+        "canonical": "#B86A00",
+        "tonalRamp": [
+          "#280000",
+          "#490A00",
+          "#6A2B00",
+          "#8C4B00",
+          "#AF6B23",
+          "#D38C48",
+          "#FBB26F",
+          "#FFDD98"
+        ]
+      },
+      "amber-ink": {
+        "role": "tertiary",
+        "displayName": "Old-Strength Amber Ink",
+        "canonical": "#5C3500",
+        "tonalRamp": [
+          "#200000",
+          "#3D1900",
+          "#5C3500",
+          "#7D5326",
+          "#9F7346",
+          "#C29467",
+          "#E9BA8B",
+          "#FFE4B4"
+        ]
+      },
+      "error": {
+        "role": "tertiary",
+        "displayName": "Hard-Error Red",
+        "canonical": "#B3261E",
+        "tonalRamp": [
+          "#2D0000",
+          "#4F0000",
+          "#721D16",
+          "#953E34",
+          "#BA5F53",
+          "#DF8073",
+          "#FFA697",
+          "#FFD0C0"
+        ]
+      },
+      "ground-night": {
+        "role": "neutral",
+        "displayName": "Lavender Ground (night)",
+        "canonical": "#131017",
+        "tonalRamp": [
+          "#0C0A10",
+          "#26222A",
+          "#413E46",
+          "#5F5C65",
+          "#7F7B85",
+          "#A09CA6",
+          "#C6C2CC",
+          "#F0ECF7"
+        ]
+      },
+      "label-stock-night": {
+        "role": "neutral",
+        "displayName": "Label Stock (night)",
+        "canonical": "#1E1A23",
+        "tonalRamp": [
+          "#0D0911",
+          "#26222B",
+          "#423D48",
+          "#605B66",
+          "#807B86",
+          "#A19CA8",
+          "#C7C1CE",
+          "#F1ECF9"
+        ]
+      },
+      "ink-night": {
+        "role": "neutral",
+        "displayName": "Label Ink (night)",
+        "canonical": "#EFEAF3",
+        "tonalRamp": [
+          "#0D0A0F",
+          "#262229",
+          "#423E45",
+          "#605C63",
+          "#807B83",
+          "#A19CA5",
+          "#C7C2CB",
+          "#F1ECF5"
+        ]
+      },
+      "label-ink-night": {
+        "role": "neutral",
+        "displayName": "Label Ink (night)",
+        "canonical": "#F5F1F8",
+        "tonalRamp": [
+          "#0D0A0E",
+          "#262328",
+          "#413E44",
+          "#5F5C62",
+          "#7F7C82",
+          "#A09DA3",
+          "#C6C2C9",
+          "#F1EDF4"
+        ]
+      },
+      "ink-muted-night": {
+        "role": "neutral",
+        "displayName": "Muted Ink (night)",
+        "canonical": "#A9A1B2",
+        "tonalRamp": [
+          "#0E0814",
+          "#27212E",
+          "#433C4B",
+          "#615A69",
+          "#81798A",
+          "#A29BAB",
+          "#C8C0D2",
+          "#F3EAFD"
+        ]
+      },
+      "label-muted-night": {
+        "role": "neutral",
+        "displayName": "Muted Label Ink (night)",
+        "canonical": "#B5ADBE",
+        "tonalRamp": [
+          "#0E0814",
+          "#27212E",
+          "#433C4B",
+          "#615A69",
+          "#817A89",
+          "#A29BAB",
+          "#C8C0D1",
+          "#F3EAFC"
+        ]
+      },
+      "rule-night": {
+        "role": "neutral",
+        "displayName": "Hairline (night)",
+        "canonical": "#3A3341",
+        "tonalRamp": [
+          "#0E0814",
+          "#27212E",
+          "#433C4B",
+          "#625A69",
+          "#81798A",
+          "#A39AAB",
+          "#C9C0D2",
+          "#F3EAFC"
+        ]
+      },
+      "label-line-night": {
+        "role": "neutral",
+        "displayName": "Label Hairline (night)",
+        "canonical": "#3F3747",
+        "tonalRamp": [
+          "#0E0815",
+          "#28202F",
+          "#443C4C",
+          "#62596B",
+          "#82798B",
+          "#A39AAD",
+          "#C9BFD3",
+          "#F4EAFE"
+        ]
+      },
+      "violet-night": {
+        "role": "primary",
+        "displayName": "Ampoule Violet (night)",
+        "canonical": "#D4B4E6",
+        "tonalRamp": [
+          "#160021",
+          "#31163E",
+          "#4E325C",
+          "#6D507C",
+          "#8E709E",
+          "#B091C1",
+          "#D6B6E8",
+          "#FFE0FF"
+        ]
+      },
+      "on-violet-night": {
+        "role": "primary",
+        "displayName": "On Violet (night)",
+        "canonical": "#24132E",
+        "tonalRamp": [
+          "#13041C",
+          "#2D1B37",
+          "#493755",
+          "#685574",
+          "#887496",
+          "#AA95B8",
+          "#D0BADF",
+          "#FBE5FF"
+        ]
+      },
+      "violet-wash-night": {
+        "role": "primary",
+        "displayName": "Violet Wash (night)",
+        "canonical": "#33263D",
+        "tonalRamp": [
+          "#110519",
+          "#2A1E34",
+          "#473952",
+          "#655771",
+          "#857691",
+          "#A797B4",
+          "#CDBDDA",
+          "#F8E7FF"
+        ]
+      },
+      "chosen-night": {
+        "role": "neutral",
+        "displayName": "Chosen Violet (night)",
+        "canonical": "#4A3558",
+        "tonalRamp": [
+          "#14021E",
+          "#2E1A3A",
+          "#4B3659",
+          "#695378",
+          "#8A739A",
+          "#AB94BC",
+          "#D2B9E3",
+          "#FCE3FF"
+        ]
+      },
+      "band-night": {
+        "role": "secondary",
+        "displayName": "Label Band Lilac (night)",
+        "canonical": "#B993CD",
+        "tonalRamp": [
+          "#180025",
+          "#331242",
+          "#512F61",
+          "#704D82",
+          "#916CA4",
+          "#B38DC7",
+          "#DAB3EF",
+          "#FFDDFF"
+        ]
+      },
+      "on-band-night": {
+        "role": "secondary",
+        "displayName": "Band Ink (night)",
+        "canonical": "#17121B",
+        "tonalRamp": [
+          "#0E0911",
+          "#27222B",
+          "#433D48",
+          "#615B66",
+          "#817A86",
+          "#A29BA8",
+          "#C8C1CE",
+          "#F2EBF9"
+        ]
+      },
+      "amber-bg-night": {
+        "role": "tertiary",
+        "displayName": "Old-Strength Amber Wash (night)",
+        "canonical": "#33250F",
+        "tonalRamp": [
+          "#140800",
+          "#2F210B",
+          "#4C3D27",
+          "#6B5B44",
+          "#8B7B62",
+          "#AD9C83",
+          "#D3C1A7",
+          "#FEECD1"
+        ]
+      },
+      "amber-line-night": {
+        "role": "tertiary",
+        "displayName": "Old-Strength Amber Line (night)",
+        "canonical": "#E0A23C",
+        "tonalRamp": [
+          "#240000",
+          "#431400",
+          "#623200",
+          "#835100",
+          "#A5720F",
+          "#C9933D",
+          "#F1B965",
+          "#FFE490"
+        ]
+      },
+      "amber-ink-night": {
+        "role": "tertiary",
+        "displayName": "Old-Strength Amber Ink (night)",
+        "canonical": "#F7D49A",
+        "tonalRamp": [
+          "#1C0300",
+          "#381D00",
+          "#573900",
+          "#76581E",
+          "#987840",
+          "#BA9961",
+          "#E1BF85",
+          "#FFE9AE"
+        ]
+      },
+      "error-night": {
+        "role": "tertiary",
+        "displayName": "Hard-Error Red (night)",
+        "canonical": "#FFB4AB",
+        "tonalRamp": [
+          "#260000",
+          "#460B0A",
+          "#672A25",
+          "#894842",
+          "#AC6860",
+          "#D08981",
+          "#F9AEA5",
+          "#FFD8CF"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Label Figure",
+        "purpose": "The result figure only; shrinks to fit one line."
+      },
+      "headline": {
+        "displayName": "Band Name",
+        "purpose": "Drug name in the label band, uppercase."
+      },
+      "brand": {
+        "displayName": "Brand Mark",
+        "purpose": "PRESSOR in the top bar; sheet titles at 24."
+      },
+      "title": {
+        "displayName": "Section Head",
+        "purpose": "Form section headings and table heads, uppercase."
+      },
+      "field-figure": {
+        "displayName": "Field Figure",
+        "purpose": "Typed values in number fields."
+      },
+      "body-strong": {
+        "displayName": "Body Strong",
+        "purpose": "Basis line, chip and segment labels."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Assumption summary, hints, About prose."
+      },
+      "action": {
+        "displayName": "Action",
+        "purpose": "Text and outline buttons."
+      },
+      "label": {
+        "displayName": "Field Label",
+        "purpose": "Labels above fields, hints."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "sheet-slide",
+        "value": "native Modal animationType=slide",
+        "purpose": "Bottom sheets slide up; the only motion in the app."
+      },
+      {
+        "name": "pressed",
+        "value": "opacity 0.85 or violet-wash fill",
+        "purpose": "Immediate pressed feedback; no transitions."
+      }
+    ],
+    "breakpoints": [],
+    "touch": {
+      "minTarget": "48dp",
+      "field": "56dp",
+      "optionRow": "52dp"
+    },
+    "fonts": {
+      "Barlow": [
+        "400",
+        "500",
+        "600",
+        "700"
+      ],
+      "Barlow Condensed": [
+        "700",
+        "800"
+      ],
+      "loading": "bundled via @expo-google-fonts, no network"
+    },
+    "edgeFade": {
+      "steps": [
+        1,
+        0.85,
+        0.65,
+        0.45,
+        0.25,
+        0.1
+      ],
+      "stepHeight": "3dp",
+      "color": "ground",
+      "purpose": "Form fades under the pinned result card."
+    },
+    "backdrop": {
+      "day": "rgba(28,24,34,0.5)",
+      "night": "rgba(0,0,0,0.65)"
+    },
+    "appIcon": {
+      "description": "Lilac band field, ink condensed P, ink rule",
+      "adaptiveBackground": "#C9A2DC"
+    }
+  },
+  "components": [
+    {
+      "name": "Result Card",
+      "kind": "card",
+      "refersTo": "result-card",
+      "description": "The answer printed as a syringe label: violet band, 2px ink rule, one huge condensed figure, the assumptions beneath.",
+      "html": "<div class=\"ds-label\"><div class=\"ds-label-band\"><span class=\"ds-label-drug\">NORADRENALINE</span><span class=\"ds-label-conc\">50 mcg/mL</span></div><div class=\"ds-label-body\"><div class=\"ds-label-value\"><span class=\"ds-label-fig\">8.4</span><span class=\"ds-label-unit\">mL/h</span></div><p class=\"ds-label-basis\">for 0.1&nbsp;mcg/kg/min at 70&nbsp;kg</p><p class=\"ds-label-summary\">10 &times; 1&nbsp;mg/1&nbsp;mL into 200&nbsp;mL (10&nbsp;mL removed) = 50&nbsp;mcg/mL</p></div></div>",
+      "css": ".ds-label{background:#FFFFFF;border:1px solid #D6CFDD;border-radius:8px;overflow:hidden;color:#1C1822;max-width:380px}.ds-label-band{background:#C9A2DC;color:#1C1822;display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:8px 16px 6px;border-bottom:2px solid #1C1822}.ds-label-drug{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:28px;line-height:34px;letter-spacing:.4px;text-transform:uppercase}.ds-label-conc{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:19px;font-variant-numeric:tabular-nums}.ds-label-body{padding:12px 16px}.ds-label-value{display:flex;align-items:baseline;gap:8px}.ds-label-fig{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:84px;line-height:92px;letter-spacing:-1px;font-variant-numeric:tabular-nums}.ds-label-unit{font-family:'Barlow',sans-serif;font-weight:600;font-size:22px}.ds-label-basis{font-family:'Barlow',sans-serif;font-weight:600;font-size:16px;line-height:22px;margin:0}.ds-label-summary{font-family:'Barlow',sans-serif;font-size:15px;line-height:21px;color:#5E5668;margin:2px 0 0}"
+    },
+    {
+      "name": "Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Quick pick for drugs, bag sizes and remembered strengths; selected prints in ink.",
+      "html": "<div class=\"ds-chips\"><button class=\"ds-chip\">Adrenaline</button><button class=\"ds-chip ds-chip-on\" aria-pressed=\"true\">Noradrenaline</button></div>",
+      "css": ".ds-chips{display:flex;gap:8px}.ds-chip{font-family:'Barlow',sans-serif;font-weight:600;font-size:16px;min-height:44px;padding:0 14px;border-radius:8px;border:1.5px solid #D6CFDD;background:#FFFFFF;color:#1C1822;cursor:pointer}.ds-chip:active{background:#EDE3F3}.ds-chip:focus-visible{outline:2px solid #5A2D75;outline-offset:2px}.ds-chip-on{background:#1C1822;border-color:#1C1822;color:#F3F0F6}"
+    },
+    {
+      "name": "Segmented Control",
+      "kind": "custom",
+      "refersTo": "segmented-selected",
+      "description": "One choice of a few, always visible; selected segment fills violet.",
+      "html": "<div class=\"ds-seg\" role=\"radiogroup\"><button class=\"ds-seg-item ds-seg-on\" role=\"radio\" aria-checked=\"true\">Find rate</button><button class=\"ds-seg-item\" role=\"radio\" aria-checked=\"false\">Find dose</button></div>",
+      "css": ".ds-seg{display:flex;gap:2px;padding:2px;border:1.5px solid #D6CFDD;border-radius:10px;max-width:360px}.ds-seg-item{flex:1;min-height:44px;border:0;border-radius:8px;background:transparent;color:#1C1822;font-family:'Barlow',sans-serif;font-weight:600;font-size:16px;cursor:pointer}.ds-seg-item:active{background:#EDE3F3}.ds-seg-item:focus-visible{outline:2px solid #5A2D75}.ds-seg-on{background:#5A2D75;color:#FFFFFF}"
+    },
+    {
+      "name": "Number Field with Unit",
+      "kind": "input",
+      "refersTo": "number-field",
+      "description": "56dp numeric field; a changeable unit is a violet button with a drawn chevron. Never a numeric placeholder.",
+      "html": "<label class=\"ds-nf\"><span class=\"ds-nf-label\">Amount</span><span class=\"ds-nf-box\"><input class=\"ds-nf-input\" inputmode=\"decimal\" value=\"1\"><button class=\"ds-nf-unit\">mg<i class=\"ds-chev\"></i></button></span></label>",
+      "css": ".ds-nf{display:block;max-width:220px}.ds-nf-label{display:block;font-family:'Barlow',sans-serif;font-weight:600;font-size:14px;color:#5E5668;margin-bottom:4px}.ds-nf-box{display:flex;align-items:stretch;min-height:56px;background:#FFFFFF;border:1.5px solid #D6CFDD;border-radius:10px;overflow:hidden}.ds-nf-box:focus-within{border:2px solid #5A2D75}.ds-nf-input{flex:1;min-width:48px;border:0;outline:0;background:transparent;color:#1C1822;caret-color:#5A2D75;font-family:'Barlow',sans-serif;font-weight:600;font-size:24px;padding:8px 12px;font-variant-numeric:tabular-nums}.ds-nf-unit{display:flex;align-items:center;gap:8px;min-width:48px;padding:0 12px;border:0;border-left:1px solid #D6CFDD;background:transparent;color:#5A2D75;font-family:'Barlow',sans-serif;font-weight:700;font-size:16px;cursor:pointer}.ds-nf-unit:active{background:#EDE3F3}.ds-chev{width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-top:-3px}"
+    },
+    {
+      "name": "Unconfirmed Field",
+      "kind": "input",
+      "refersTo": "number-field-unconfirmed",
+      "description": "A remembered strength not yet checked against the ampoule: amber wash, dashed amber border.",
+      "html": "<span class=\"ds-nf-old\"><input class=\"ds-nf-old-input\" value=\"1\"><span class=\"ds-nf-old-sfx\">mL</span></span>",
+      "css": ".ds-nf-old{display:flex;align-items:center;max-width:200px;min-height:56px;background:#FCEFD8;border:1.5px dashed #B86A00;border-radius:10px}.ds-nf-old:focus-within{border:2px solid #5A2D75}.ds-nf-old-input{flex:1;min-width:48px;border:0;outline:0;background:transparent;color:#5C3500;font-family:'Barlow',sans-serif;font-weight:600;font-size:24px;padding:8px 12px}.ds-nf-old-sfx{font-family:'Barlow',sans-serif;font-weight:600;font-size:16px;color:#5E5668;margin-right:12px}"
+    },
+    {
+      "name": "Old-Strength Stamp",
+      "kind": "custom",
+      "refersTo": "button-confirm",
+      "description": "Dashed amber stamp asking the clinician to confirm a remembered strength, with the violet confirm button.",
+      "html": "<div class=\"ds-stamp\"><div><div class=\"ds-stamp-title\">Old · used 2 days ago</div><div class=\"ds-stamp-body\">Check it against the ampoule in your hand.</div></div><button class=\"ds-confirm\">Matches my ampoule</button></div>",
+      "css": ".ds-stamp{display:flex;flex-direction:column;gap:12px;padding:12px;max-width:360px;background:#FCEFD8;border:1.5px dashed #B86A00;border-radius:10px;color:#5C3500}.ds-stamp-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:20px;text-transform:uppercase;letter-spacing:.5px}.ds-stamp-body{font-family:'Barlow',sans-serif;font-weight:500;font-size:16px;line-height:22px}.ds-confirm{min-height:48px;border:0;border-radius:10px;background:#5A2D75;color:#FFFFFF;font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;cursor:pointer}.ds-confirm:active{opacity:.85}.ds-confirm:focus-visible{outline:2px solid #1C1822;outline-offset:2px}"
+    },
+    {
+      "name": "Outline Action",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary actions on the label: Show working, Titration table.",
+      "html": "<button class=\"ds-outline\">Show working</button>",
+      "css": ".ds-outline{min-height:44px;padding:0 20px;border:1.5px solid #D6CFDD;border-radius:10px;background:#FFFFFF;color:#5A2D75;font-family:'Barlow',sans-serif;font-weight:700;font-size:16px;cursor:pointer}.ds-outline:active{background:#EDE3F3}.ds-outline:focus-visible{outline:2px solid #5A2D75;outline-offset:2px}"
+    },
+    {
+      "name": "Top Bar",
+      "kind": "nav",
+      "refersTo": "brand",
+      "description": "Brand mark in condensed caps with violet text actions; no tab bar.",
+      "html": "<header class=\"ds-bar\"><span class=\"ds-bar-brand\">Pressor</span><nav><a class=\"ds-bar-link\" href=\"#\">Reset</a><a class=\"ds-bar-link\" href=\"#\">About</a></nav></header>",
+      "css": ".ds-bar{display:flex;justify-content:space-between;align-items:center;min-height:52px;padding:0 4px 0 16px;background:#F3F0F6}.ds-bar-brand{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:26px;letter-spacing:1.5px;text-transform:uppercase;color:#1C1822}.ds-bar-link{display:inline-block;line-height:48px;padding:0 12px;font-family:'Barlow',sans-serif;font-weight:700;font-size:17px;color:#5A2D75;text-decoration:none}.ds-bar-link:hover{text-decoration:underline}.ds-bar-link:focus-visible{outline:2px solid #5A2D75}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Syringe Label",
+    "overview": "Pressor prints its answer the way a clinician labels a drawn-up syringe: a coloured band carrying the drug name in heavy condensed capitals, white label stock beneath, and the one number that matters set huge in condensed figures. Everything else on the screen is the form you fill in to produce that label, in the order the bag was mixed. The world is borrowed from the ISO 26825 user-applied label, but only its grammar: band, stock, ink. Pressor uses a single violet band for every drug as its own brand colour, not as a drug-class code.\n\nThe system is quiet, flat and high-contrast so it reads in theatre glare and in a dim ward at night. There are no shadows, gradients (other than the scroll edge fade) or decorative illustration. Hierarchy comes from scale contrast (one enormous figure against small, even text), from the condensed face marking \"things printed on the label\", and from a tiny, strictly assigned colour vocabulary where amber and red each mean exactly one thing. Light and dark follow the system; the band stays violet in both.\n\nNative platform pieces are used as-is: the decimal keypad, the system switch, modal bottom sheets, the Android back gesture. Pressor styles them with its tokens but does not reinvent them.",
+    "keyCharacteristics": [
+      "The result card is the label: violet band, 2px ink rule, white stock, one huge condensed figure.",
+      "Violet-tinted near-white ground by day, violet-black by night; ink is never pure black or pure white.",
+      "Barlow for the interface, Barlow Condensed for anything \"printed\" (brand, band, section heads, figures, sheet titles).",
+      "Flat: borders and tone separate surfaces, never shadows.",
+      "Gloved-hand sizing: 48dp minimum targets, 56dp number fields."
+    ],
+    "rules": [
+      {
+        "name": "The One Meaning Rule",
+        "body": "Amber means only \"old value, check it\". Red means only \"cannot compute\". Neither is used for emphasis, branding or a dose judgement.",
+        "section": "colors"
+      },
+      {
+        "name": "The Brand Band Rule",
+        "body": "The band is Pressor's violet on every drug. It is not ISO 26825 class colour coding and must never change hue by drug.",
+        "section": "colors"
+      },
+      {
+        "name": "The Nothing Outshines the Answer Rule",
+        "body": "Selected chips print in solid ink by day; at night they drop to a dim violet (`chosen-night`) with a lilac border, so no control is brighter than the result figure.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Huge Figure Rule",
+        "body": "The result figure is the only display-size type. Under it, the basis and assumption lines use two small sizes (16 and 15). Do not add a second large number anywhere on the screen.",
+        "section": "typography"
+      },
+      {
+        "name": "The Unbroken Quantity Rule",
+        "body": "A number and its unit never split across lines, and neither does a compound unit: the assumption line joins number and unit with a no-break space and puts a word joiner after every slash.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Figures Rule",
+        "body": "Every computed or typed number uses tabular figures so columns and re-renders do not jitter.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Label Rule",
+        "body": "Surfaces are separated by stock colour and hairlines. A shadow would make the label look like a floating card; it is printed, not lifted.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep exactly one display-size figure on the screen: the result, in Barlow Condensed 800.",
+      "Do use Barlow Condensed for anything \"printed\" (brand, band, section heads, sheet titles, table heads, computed figures) and Barlow for everything you operate.",
+      "Do keep every tap target at least 48dp; use hit slop when a control is visually smaller.",
+      "Do keep number and unit together with a no-break space, and put a word joiner after slashes in units.",
+      "Do separate surfaces with label stock and 1–1.5px hairlines.",
+      "Do print selected choices in ink by day and dim violet by night.",
+      "Do keep the same violet band for every drug."
+    ],
+    "donts": [
+      "Don't use amber for anything except an unconfirmed remembered value, or red for anything except a value that cannot be computed.",
+      "Don't colour the band by drug class or imply ISO 26825 class coding.",
+      "Don't put numeric placeholders in fields; an empty field must never look filled.",
+      "Don't add shadows or elevation to cards, sheets or headers.",
+      "Don't use pure black or pure white ink; use the violet-tinted ink tokens.",
+      "Don't let a selected control outshine the result figure at night.",
+      "Don't add a second large number or a decorative hero; the label is the only focal point."
+    ]
+  }
+}

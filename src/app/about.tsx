@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router';
 import { Linking, Pressable, ScrollView, StyleSheet, Text } from 'react-native';
-import { space, useColors } from '../theme';
+import { font, space, useColors } from '../theme';
 
 const REPO = 'https://github.com/JoshCullinan/pressor';
 
@@ -11,10 +11,11 @@ export default function About() {
       <Stack.Screen
         options={{
           headerShown: true,
-          title: 'About',
+          title: '',
           headerBackTitle: 'Back',
           headerStyle: { backgroundColor: c.bg },
           headerTintColor: c.text,
+          headerTitleStyle: { fontFamily: font.labelHeavy, fontSize: 24 },
           headerShadowVisible: false,
         }}
       />
@@ -51,8 +52,8 @@ export default function About() {
 
 const styles = StyleSheet.create({
   content: { padding: space.lg, gap: space.md },
-  title: { fontSize: 28, fontWeight: '800' },
-  heading: { fontSize: 18, fontWeight: '700', marginTop: space.md },
-  body: { fontSize: 16, lineHeight: 24 },
-  link: { fontSize: 16, textDecorationLine: 'underline' },
+  title: { fontFamily: font.labelHeavy, fontSize: 34, textTransform: 'uppercase', letterSpacing: 1.5 },
+  heading: { fontFamily: font.label, fontSize: 20, textTransform: 'uppercase', letterSpacing: 1, marginTop: space.md },
+  body: { fontFamily: font.regular, fontSize: 17, lineHeight: 25, maxWidth: 640 },
+  link: { fontFamily: font.semibold, fontSize: 16, textDecorationLine: 'underline' },
 });

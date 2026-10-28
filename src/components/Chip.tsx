@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text } from 'react-native';
-import { TOUCH, radius, space, useColors } from '../theme';
+import { TOUCH, font, radius, space, useColors } from '../theme';
 
 interface Props {
   label: string;
@@ -8,7 +8,7 @@ interface Props {
   accessibilityLabel?: string;
 }
 
-/** A tappable pill for quick picks (bag sizes, drug names, remembered strengths). */
+/** A tappable pill for quick picks (bag sizes, drug names, remembered strengths). Selected chips are printed in ink. */
 export function Chip({ label, selected = false, onPress, accessibilityLabel }: Props) {
   const c = useColors();
   return (
@@ -17,23 +17,27 @@ export function Chip({ label, selected = false, onPress, accessibilityLabel }: P
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel ?? label}
       accessibilityState={{ selected }}
-      style={[
+      hitSlop={4}
+      style={({ pressed }) => [
         styles.chip,
-        { borderColor: selected ? c.accent : c.border, backgroundColor: selected ? c.accentSoft : c.surface },
+        {
+          borderColor: selected ? c.chosenBorder : c.border,
+          backgroundColor: selected ? c.chosen : pressed ? c.accentSoft : c.surface,
+        },
       ]}
     >
-      <Text style={[styles.text, { color: selected ? c.accent : c.text }]}>{label}</Text>
+      <Text style={[styles.text, { color: selected ? c.onChosen : c.text }]}>{label}</Text>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   chip: {
-    minHeight: TOUCH - 8,
-    paddingHorizontal: space.lg,
+    minHeight: TOUCH - 4,
+    paddingHorizontal: space.md + 2,
     justifyContent: 'center',
-    borderRadius: radius.lg,
+    borderRadius: radius.sm,
     borderWidth: 1.5,
   },
-  text: { fontSize: 16, fontWeight: '600' },
+  text: { fontFamily: font.semibold, fontSize: 16 },
 });

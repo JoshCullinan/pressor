@@ -73,6 +73,10 @@ export type Evaluation =
       headline: Headline;
       /** One line stating every assumption behind the result. */
       summary: string;
+      /** The bag's concentration in the dose's unit, e.g. "50 mcg/mL". */
+      concentration: string;
+      /** What the answer was worked from, e.g. "for 0.1 mcg/kg/min at 70 kg". */
+      basis: string;
       /** The formulas with the numbers substituted. */
       working: string[];
       notices: string[];
@@ -194,6 +198,8 @@ export function evaluate(form: FormState, pumpStep: PumpStep): Evaluation {
     status: 'ok',
     headline,
     summary: describeMix(mix, m, du.unit),
+    concentration: concText,
+    basis: `${toRate ? `for ${sigFigs(dose!)} ${doseLabel}` : `from ${sigFigs(rate!)} mL/h`}${du.perKg ? ` at ${sigFigs(weight!)} kg` : ''}`,
     working,
     notices,
     inputs: { mix, doseUnit: du, weightKg: du.perKg ? weight : undefined, ...solved },

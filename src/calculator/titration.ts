@@ -70,7 +70,8 @@ export function titrationTable(inputs: CalcInputs, mode: TableMode, spec: TableS
         input,
         inputText: sigFigs(input),
         outputText: rounded.toFixed(decimals),
-        current: near(input, inputs.dose),
+        // A dose worked back from a rate (0.0714285…) still matches its three-figure row (0.0714).
+        current: near(input, inputs.dose) || sigFigs(input) === sigFigs(inputs.dose),
       };
       if (pumpStep === 1) {
         const d = rounded > 0 ? rateToDose(mix, doseUnit, rounded, weightKg) : undefined;

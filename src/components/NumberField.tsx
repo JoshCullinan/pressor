@@ -1,65 +1,107 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { useState } from 'react';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { sanitizeNumberInput } from '../calculator/parse';
-import { radius, space, useColors } from '../theme';
+import { TOUCH, font, radius, space, useColors } from '../theme';
 
 interface Props {
   label: string;
   value: string;
   onChangeText: (text: string) => void;
+  /** A fixed unit printed inside the field. */
   suffix?: string;
+  /** A unit the clinician can change: shown as a button inside the field. */
+  unit?: { label: string; onPress: () => void; accessibilityLabel: string };
   placeholder?: string;
-  /** Amber styling for a value that came from memory and hasn't been checked yet. */
+  /** A value that came from memory and hasn't been checked against the ampoule yet. */
   unconfirmed?: boolean;
   onFocus?: () => void;
   onBlur?: () => void;
-  testID?: string;
+  flex?: number;
 }
 
-export function NumberField({ label, value, onChangeText, suffix, placeholder, unconfirmed, onFocus, onBlur, testID }: Props) {
+export function NumberField({ label, value, onChangeText, suffix, unit, placeholder, unconfirmed, onFocus, onBlur, flex = 1 }: Props) {
   const c = useColors();
+  const [focused, setFocused] = useState(false);
+  const borderColor = focused ? c.accent : unconfirmed ? c.warnBorder : c.border;
   return (
-    <View style={styles.wrap}>
+    <View style={{ flex }}>
       <Text style={[styles.label, { color: c.textMuted }]}>{label}</Text>
       <View
         style={[
           styles.box,
           {
             backgroundColor: unconfirmed ? c.warnBg : c.surface,
-            borderColor: unconfirmed ? c.warnBorder : c.border,
+            borderColor,
+            borderWidth: focused ? 2 : 1.5,
+            borderStyle: unconfirmed && !focused ? 'dashed' : 'solid',
           },
         ]}
       >
         <TextInput
-          testID={testID}
-          accessibilityLabel={label}
+          accessibilityLabel={unit ? `${label}, ${unit.label}` : label}
           value={value}
           onChangeText={(t) => onChangeText(sanitizeNumberInput(t))}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={() => {
+            setFocused(true);
+            onFocus?.();
+          }}
+          onBlur={() => {
+            setFocused(false);
+            onBlur?.();
+          }}
           placeholder={placeholder}
           placeholderTextColor={c.textMuted}
           keyboardType="decimal-pad"
           inputMode="decimal"
           selectTextOnFocus
+          selectionColor={c.accent}
+          cursorColor={c.accent}
           style={[styles.input, { color: unconfirmed ? c.warnText : c.text }]}
         />
         {suffix ? <Text style={[styles.suffix, { color: c.textMuted }]}>{suffix}</Text> : null}
+        {unit ? (
+          <Pressable
+            onPress={unit.onPress}
+            accessibilityRole="button"
+            accessibilityLabel={unit.accessibilityLabel}
+            style={({ pressed }) => [styles.unit, { borderLeftColor: c.border }, pressed && { backgroundColor: c.accentSoft }]}
+          >
+            <Text style={[styles.unitText, { color: c.accent }]}>{unit.label}</Text>
+            <Chevron color={c.accent} />
+          </Pressable>
+        ) : null}
       </View>
     </View>
   );
 }
 
+/** A small downward chevron drawn from two borders. */
+export function Chevron({ color }: { color: string }) {
+  return <View style={[styles.chevron, { borderColor: color }]} />;
+}
+
 const styles = StyleSheet.create({
-  wrap: { flex: 1 },
-  label: { fontSize: 13, fontWeight: '600', marginBottom: space.xs },
-  box: {
+  label: { fontFamily: font.semibold, fontSize: 14, marginBottom: space.xs },
+  box: { flexDirection: 'row', alignItems: 'center', minHeight: 56, borderRadius: radius.control, overflow: 'hidden' },
+  input: {
+    flex: 1,
+    minWidth: 48,
+    fontFamily: font.semibold,
+    fontSize: 24,
+    paddingVertical: 8,
+    paddingHorizontal: space.md,
+    fontVariant: ['tabular-nums'],
+  },
+  suffix: { fontFamily: font.semibold, fontSize: 16, marginRight: space.md },
+  unit: {
+    alignSelf: 'stretch',
+    minWidth: TOUCH,
     flexDirection: 'row',
     alignItems: 'center',
-    minHeight: 56,
-    borderWidth: 1.5,
-    borderRadius: radius.md,
+    gap: space.sm,
     paddingHorizontal: space.md,
+    borderLeftWidth: 1,
   },
-  input: { flex: 1, fontSize: 22, fontWeight: '600', paddingVertical: 8, fontVariant: ['tabular-nums'] },
-  suffix: { fontSize: 15, fontWeight: '600', marginLeft: space.sm },
+  unitText: { fontFamily: font.bold, fontSize: 16 },
+  chevron: { width: 7, height: 7, borderRightWidth: 2, borderBottomWidth: 2, transform: [{ rotate: '45deg' }], marginTop: -3 },
 });

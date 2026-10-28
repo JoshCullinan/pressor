@@ -41,6 +41,8 @@ describe('by dose', () => {
   it('rounds a worked-back dose to three significant figures for its defaults', () => {
     const back = inputsFor({ ...form, direction: 'rate-to-dose', rate: '6' }); // 0.0714285… mcg/kg/min
     expect(defaultSpec('by-dose', back, 0.1)).toEqual({ start: 0.0714, step: 0.0714, rows: 10 });
+    const rows = titrationTable(back, 'by-dose', defaultSpec('by-dose', back, 0.1), 0.1);
+    expect(rows.filter((r) => r.current).map((r) => r.inputText)).toEqual(['0.0714']);
   });
 
   it('gives the rounded rate for each dose and marks the current one', () => {

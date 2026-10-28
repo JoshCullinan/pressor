@@ -5,7 +5,7 @@ import { parseNumber } from '../calculator/parse';
 import { MAX_ROWS, defaultSpec, titrationTable, type TableMode } from '../calculator/titration';
 import { doseUnitLabel } from '../data/drugs';
 import { sigFigs, type PumpStep } from '../engine';
-import { TOUCH, radius, space, useColors } from '../theme';
+import { TOUCH, font, radius, space, useColors } from '../theme';
 import { NumberField } from './NumberField';
 import { Segmented } from './Segmented';
 
@@ -55,12 +55,9 @@ export function TitrationTable({ inputs, summary, pumpStep, initialMode, onPick 
       </Text>
       <Segmented options={MODE_OPTIONS} value={mode} onChange={switchMode} accessibilityLabel="Table mode" />
       <View style={styles.controls}>
-        <NumberField label="Start" value={fields.start} onChangeText={(start) => setFields({ ...fields, start })} suffix={unit} />
-        <NumberField label="Step" value={fields.step} onChangeText={(step) => setFields({ ...fields, step })} suffix={unit} />
-      </View>
-      <View style={styles.controls}>
-        <NumberField label={`Rows (up to ${MAX_ROWS})`} value={fields.rows} onChangeText={(r) => setFields({ ...fields, rows: r })} />
-        <View style={styles.flex} />
+        <NumberField label={`Start, ${unit}`} value={fields.start} onChangeText={(start) => setFields({ ...fields, start })} flex={1.2} />
+        <NumberField label={`Step, ${unit}`} value={fields.step} onChangeText={(step) => setFields({ ...fields, step })} flex={1.2} />
+        <NumberField label="Rows" value={fields.rows} onChangeText={(r) => setFields({ ...fields, rows: r })} flex={0.8} />
       </View>
 
       {rows.length === 0 ? (
@@ -68,7 +65,7 @@ export function TitrationTable({ inputs, summary, pumpStep, initialMode, onPick 
           Start and step must be greater than zero, and rows a whole number from 1 to {MAX_ROWS}.
         </Text>
       ) : (
-        <View style={[styles.table, { borderColor: c.border }]}>
+        <View style={[styles.table, { borderColor: c.border, backgroundColor: c.surface }]}>
           <View style={[styles.row, styles.headRow, { borderColor: c.border }]}>
             <Text style={[styles.cell, styles.head, { color: c.textMuted }]}>{byDose ? `Dose\n${doseLabel}` : 'Rate\nmL/h'}</Text>
             <Text style={[styles.cell, styles.head, { color: c.textMuted }]}>{byDose ? 'Rate\nmL/h' : `Dose\n${doseLabel}`}</Text>
@@ -87,7 +84,7 @@ export function TitrationTable({ inputs, summary, pumpStep, initialMode, onPick 
                   : `${r.inputText} millilitres per hour: ${r.outputText} ${doseLabel}`
               }
               accessibilityState={{ selected: r.current }}
-              style={[styles.row, { borderColor: c.border }, r.current && { backgroundColor: c.accentSoft }]}
+              style={({ pressed }) => [styles.row, { borderColor: c.border }, (r.current || pressed) && { backgroundColor: c.accentSoft }]}
             >
               <Text style={[styles.cell, styles.value, { color: r.current ? c.accent : c.text }]}>{r.inputText}</Text>
               <Text style={[styles.cell, styles.value, styles.strong, { color: r.current ? c.accent : c.text }]}>
@@ -114,16 +111,15 @@ function toFields(spec: { start: number; step: number; rows: number }) {
 
 const styles = StyleSheet.create({
   wrap: { gap: space.md, paddingTop: space.sm, paddingBottom: space.lg },
-  summary: { fontSize: 14, lineHeight: 20 },
-  controls: { flexDirection: 'row', gap: space.md },
-  flex: { flex: 1 },
-  empty: { fontSize: 15, fontWeight: '600' },
+  summary: { fontFamily: font.medium, fontSize: 15, lineHeight: 21 },
+  controls: { flexDirection: 'row', gap: space.sm, alignItems: 'flex-end' },
+  empty: { fontFamily: font.semibold, fontSize: 16, lineHeight: 22 },
   table: { borderWidth: 1.5, borderRadius: radius.md, overflow: 'hidden' },
   row: { flexDirection: 'row', alignItems: 'center', minHeight: TOUCH, borderTopWidth: 1, paddingHorizontal: space.md },
   headRow: { borderTopWidth: 0, minHeight: 52, paddingVertical: space.sm },
   cell: { flex: 1 },
-  head: { fontSize: 13, fontWeight: '700' },
-  value: { fontSize: 18, fontVariant: ['tabular-nums'] },
-  strong: { fontWeight: '700' },
-  hint: { fontSize: 13, lineHeight: 19 },
+  head: { fontFamily: font.label, fontSize: 16, lineHeight: 19 },
+  value: { fontFamily: font.medium, fontSize: 19, fontVariant: ['tabular-nums'] },
+  strong: { fontFamily: font.labelHeavy, fontSize: 22 },
+  hint: { fontFamily: font.medium, fontSize: 14, lineHeight: 20 },
 });
